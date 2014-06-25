@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Roadtrip Test</title>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css">
+    <!--[if lte IE 8]><link rel="stylesheet" href="/the/path/to/leaflet.ie.css"><![endif]-->
+    <style>
+      html, body,  #map {
+        width : 100%;
+        height : 100%;
+      }
+    </style>
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
+    <script src="assets/js/esri-leaflet.js"></script>
+    <script src="assets/js/Polyline.encoded.js"></script>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      var template = "<h3>{NAME}</h3>{ACRES} Acres<br><small>Property ID: {PROPERTYID}<small>"
+
+      var map = L.map('map').setView([45.528, -122.680], 13);
+
+      L.esri.basemapLayer("Gray").addTo(map);
+
+      L.esri.featureLayer("http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Parks_pdx/FeatureServer/0", {
+       style: function (feature) {
+          return { color: "#70ca49", weight: 2 };
+        },
+        onEachFeature: function (feature, layer) {
+          layer.bindPopup(L.Util.template(template, feature.properties));
+        }
+      }).addTo(map);
+
+// Trip Streamwood, IL to Wildwood, NJ with waypoint Washington, D.C.
+    var encoded0 = "{pp_GzkhyOrq@_fHhjB_LfZosAvh@q{BzNkbE|e@ueHt_Dmd@rpH_oPtr@w}Al~CwDxwI}VffJosAb`B}cFrfAotFhzCyyCtiDgdC~~CsuGjvD_}EtpDi_CvuCkTjDehMpy@ou`@aYk~]auAe_Gjo@}yHlIsfL|M}}\\urBwbP}lEkxMyoEeaIanAutLojI{_QwkDieY|sCshNrzAq~]mjBcvMpJepM|Jgu[ai@iy`@}nBkwR~e@svZwQ_yS~w@elO_}AyvQxv@i|a@vgBseKtcGqcNrsDmoHlhEedFpnAemn@lnA_gb@`~A{sGySowWoD{t_@uq@s_Vhq@a`s@nvK}re@xhQ}pp@b{FyvY~uFiag@pyDk`p@e|B{dt@ckEekOypAqdQjmBqzd@`qDujXxoFmkSr`Dm{Q|zCqpIgQm_k@|nAcsv@lv@syRnrD{yDvwI{}I`eMwxPh_TukZneKoz[z|EqbShiFw~E|dIybYl`E{uDvfD_sI|fD}sFbvEweCziBa~Jtf@kaFngDqkDrvBeyM`vIcaM`pBg_A~t@k|Bd}D}eCtqLshGjqEykI|pG`dB~qIkkC|}BatCttAid@t}DohGxfDadKfjEujJ|h@keH|oFofGuiBogQv}AyrFnbAmwHzdDsoD`qA}xEn`F{xHp~BweEt_BqqLflDaw\\nu@qzBkbEshElv@obEuw@scHskC_fD_j@uvLji@wc@gsEgiGeIc{IfiEkxFfQs{Izg@qhFrqBeaSkt@otE}h@qThgFhzAhrB{yBjzIhjBnpFrmDd_GSlwA_bI|cD_~BpoBspB|mDpOrwAsCjj@ckDxfBczIhoIszNrUc~Esx@orD{dBewFzPubLx`CodGxuBweDzZqlFdx@wnO~aDw_FvhFccBtxGsmHloG{bJ~sC{fBnkBm~Dha@uoDfwC{}B|`HkdFxpCyoDbbT}fNjgRolOtlHqcDlyD_dH`sAwuCqg@erFr{JuvAtaAac@iiDy}Bo|H}wDydA}rCyqNwfLscLegPc{Li`TcwB{vBuSakDzUqrFug@ysGegAepA_wCq|@mzCunAajBmpC_cJ{fNcpCojEadAo`FwuF{iPycNohTytDkdNujEovNgzC{hLhUawJe^o_WczCkyKinCmoIqWqkFbZ{iH`fAw}OdvCopNtr@cwIdqE_tOvzDgzZlyBkyC~cIxo@roKcXxnD}}FnwJoqBbbIcqCzpLccOlrDejDlxBugGrvAkbAbhPqHjfH~jDhsEpjCfiBs|DbG{qC"
+
+// Trip: Streamwood, IL to Redwood City, CA with waypoints Hastings, NE, Fort Bridger, WY, and Winnemuca, NV
+    var encoded1 = "{pp_GzkhyOuPzk]{uBltc@xnFdxWtpH`aGtrKx_HbgA|daAlgFftXt}MxubAddIrhjArqGhja@pzUzxRhwDblP_}CnnCebFvhZykFrliBgpEjlcAa{BltiBcs@|d~AvbAlriDxpEt}mA`g@`}OjpItoEz|Knoo@~gEn~r@yVlan@_@bljBn|@|a{Avqj@duh@~nEhcWhi@`fVvzY|hk@b~IttCzoGboMrpM`vUr|A~rTxcF~~VxpGvhKua@nj}@nEtmeFmBz~QjcIxC`iO~UlnRl_AfsB~w@AdwEr@zjb@?vq]_RjcDgiIr@ibG`eHetE{Jp_@f_FhpBnsVeDd~q@msAdjVwxCfmy@icQxjh@s}g@lydBoiNzpp@iuGzanA|oEniiAukAvwl@lbJtr_AnoEbd\\udDpmo@wrIbrZgSpns@{hClsj@m`Mz{t@_e@xdfAvgEzteApiChtu@`xEx}sAp{Bp~wAatHtw`@ajQ`~G_eSnkk@qgIdq^qrFt_WyoNxaSybRvrb@cfP`{c@i}GfrPtxAhySaiE|ryAiZ|zm@hlK~tzAniL|vgAqNzr|A_bGjk_@lmEzvb@bvHjdm@txN`pf@{lFt{VdzBhev@|bEndZxfS|u`@l{G~m_@tiAt~AlsEd_Asi@xiI{r@hhE|ZfdE~lDtsh@zfDbqb@~sCjf]j_ErsNrzId~GtrMf}P|gLzaYb_E|`GniG`eAxzSktD|~SzkTeq@tia@f}B~o`@eBjmJ}gG`y@wc@vgn@|jSvn_@sfQztuAsnKb~VdpHfuPdwGvxy@}wBvykC~Ml|LqrG|aO_`Zrga@o}Ztch@xKpxJ_|E`by@vbBtpu@bgOxmn@plGlgFveAx}_@niRxaWzcNxo]jsH`uJ}]fpMb|D`_Y~uFb~OhjAjxTilIpd^hhDfm_@nsIveQceCzt]euKbnL{cQjiVsoNztVmbSzou@_eG|qGxcFjoVjqMpu]`tWd~ZbqSvxKnsExsUr{S|oQ~ue@fcF|aa@fl`@tmLxzQluStoR`af@|caA|a[fa\\hfE~zOlcDpiZzbCjkTn}Idg[u}CryYffDhmg@ddUfmDzoAr{JzpJfpT}f@hbQxkBped@ueBliRpdFn|RlsP~kWxpKveWbuUh`ItkXvwSpzp@xc~@eKrrNpmJt~LriFfq`@nxNjtSriZxxc@jgMnsG`}FtmN|wNleNpzHf`@fyN|sI`gFtoGllJg{BpuKy|AraCplK|hIr`HjwOuiBzoHtsAf|Ik`P|zPqrQjiDx_@"
+
+//Trip: Redwood City, CA to Austin, TX with waypoints Los Angeles, CA, Gallup, NM, and Lubbock, TX
+    var encoded2 = "garcFhc_iVhhEyEteDkfHvqHevNnwLybQvgCwt^feAa}LxlHsfMr_]}sVjqFmdHnxAmmGpsAcyJds@efEyhDkgAo`HixOcsFixPydBavHzl@wuGvwDypYfdKipKd{^}d\\~sk@qva@jir@gst@|a^osT|xYsr\\ftLkkQ|yo@cwi@`sUsyO~fa@azf@tcp@mw{@tpWkyYraQw`J`bSywJjnIhO|nFiqNl_NmkA~eDgnD|gJqhHrfKquJ~od@oaTdoOaxRlrIioQ|pX{{Vu~DiiHglEspBqm@}tGdhBc|U`bB{pXihBwr_AarGuhRqwE}dDurCfcBeoHbuCypEjzDsiI{nJwxh@mk^ipR}tH_zKsbHmpKixLcrKegEzW{mQvrDkfS`zHgfcAptKcjj@pjAgzw@cWogjAsaNaos@}bIo}wAmfD{~Uuw@qoNzsFsbMriNqhG|}I{wK}l@s|RagFkmg@_hJw|Ju`LjZw{[szBk`U}|E{mIgsD}O{zWtmG{e{@{{Doae@sJqgWajQoug@_aFav`@rwHekd@jnGgk]~sAuf\\q[mlZ_lGyiYpfAerq@xuMy|j@_nFwsX|aCol]b{Moby@viGoxk@prFgq`@hyDceM``I}~t@ryGip^_qIkrMmjD_xWorLi_e@{u\\qduA_nJo~M}v@moOu~Quq\\uuSchVewG{{[oXcfT`uJcrl@bfOknk@djIigc@~mMglDveR}aOrzOs}XfRatSvIomVrgEm|FvyA}jRcmAwyEtlCuqEhnC}_Np|AuhV_gOan`AkqGmh]tgGif^qnByuPmtEk~JbfHmuWn{Jgxa@xIuze@`qAazdBdhGg`rBvtB}zOnqWerRleS}iVfgJofPjaOipM`bNShoCuoEtsDwz]gq@{vGa~@qdOb{Fo{fB~{C}oiAxsYuko@dyW{b`@rh\\cqg@b~IitE`gAe`Gz~HmiOfoRkh\\t{MqiQx}CkbF~pJ{w@nfGmJb}Bc{Fj_BapXfhJeoRbfK}jKrha@ec`@tvKg`QhjS{eYz}G{xGp_PofS`d`@{kYttMw|Vzze@u}e@ziC{{e@jd[c~Jn`NwvNtwKiqG``VstS~rNwvGzc@wzGfnB}vVb{@ymP|cEw`Nv_FuyUrsEud]~kEwgNvuIezKloCm`a@eKmvWwaBmcJhfDk`RboQav\\dnLqvMx~KynKliDJbkJ_qBfqNibLtk]af]boJ_pUn{Y}r_@llNysWhrNolEt`\\}fArfUszJnrIgeAprIauFhhG_~Bj|FfZxgPxr@fGuJ"
+
+//Trip Streamwood, IL to Charlotte, NC
+    var encoded3 = "{pp_GzkhyOrq@_fHhjB_LfZosAvh@q{BzNkbE|e@ueHt_Dmd@rpH_oPtr@w}Al~CwDxwI}VffJosAb`B}cFrfAotFhzCyyCtiDgdC~~CsuGjvD_}EtpDi_CvuCkTjDehMpy@ou`@tb@wcWjxEhb@f~Thm@tcG|GpjHmuBn|CmOncNac@bfKgwCj_Mea@~dIx`@rpGyo@lcMi}GncJuuDnvJq_GfoT_}OdzJwyIrzPoaPn}GqrHtfJybE~lYc`UbxQavYvpJspIbqHsuCtfKekEhaMexRvyTopTxmHgiR~fCei@e`BybHgl@ieJ~KcqPkbB}gLa_@{kb@yGsvRylBcpLix@c|SjC_h^u^{zk@uaAanWdq@yiNleDwnDj[ssD}j@yv`@}]kya@wfB}aE~Kw}Mkp@adZpxKoBrxAcZ`}A|qAjyBvVma@_oI|lBspIhmDafLzyBqjIrgDakDy}@gpGauBi_CphCowP}XqnFjsCqrLhc@_cG|pCwoGn|DiuF~pGm`Nh~Cs|C`o@qkFkMubI`}CkdK|~HyaTn{IkkXf_AioFnoCqqElFcsEfgHyhH~hE{{E`{IqrIpgBi{BtVcoChiEu`HrjF{|Eb}Gu`Ld_GqaEtrJeqNbwCmmFlwGafDl|BsoDeJgiFhtAm~R`gEkmOjiAy}J|eGs}H~wByfJhh@krEh}DsaDvrFaq@dhKdwA|iDxqCbtBRdzBxx@t}GuqN~gErFnqAwwBvsBuzB|DqcEvqCwlF~wE}uIpnEivGwLycH`_@}}GpjCqiDr|Bg}HlsBlcAfeIn\\z{DoyFl}D{mJp_AwoBf|Acj@tgChNhd@wpDhGicE`aEqX`zDmZphFq}BpzEifCttEo|Lp|BqdArtB``AbiJoc@x}DwvGfaJl]tiDivA|uBiTvbAm`CdiAmbE~tBedChcIsvBdgGraBfvE{uAftIl`@dzEc{HreJuOj`GkhC~sEnlBpdDeF|`CfzIdtD`e@`uC}fAd_DshBdjBhmBjnA|gChkD|z@dnBodBhtCoM`jId`@rmB`}@niBwsDd|D{`DzdG_nDpvAejEuX}eS`eG}eG~mEgb@fuGq}BvuFesB`rFkwJldP{vKxwDtwBt`Dvu@faI~h@psFaA`pFzgAttDbcCntFlo@~lNrfAjzKb|DpeRefB|kNvt@lcIfLhrFr_C|tKbhBbcL|p@f{HwRryQw`@|dHpVf`OkIlzP`pA|}HeH~_JyvBb}LmOrpIoh@duBdXheCqnBz|BseIhzJ}aJtrCpW"
+
+//Trip Austin, TX to Portland, OR with waypoints Marathon, TX, Chisos Basin, TX, Albuquerque, NM, Canyon Village, AZ, and Moab, UT
+    var encoded4 = "ejywDpytsQj|NlslAehFznk@ksChxPlpEv}f@yrI`dr@ypAhhcB}k^hhs@avKpaQn{BtqTb~@rtR~kFvyZ}mFbxa@oyVp`kAkgP`niAduC`fg@wfHjsg@i}Bd_bAkaY`un@lVhhaBk{@rrr@v_|@|gGx~Yv~Dlc\\dde@~fOraPt}N`U|u[fvAbpe@s~Phpx@{nEptY|qJplL~vQuoMmxQw{Xq}Jgky@`vFm_e@`nPw}\\}}B}aNdTy`Kjfa@}lUzyYbtE|_YhzMtw\\glSfhjAgffAjsyAkpx@ll`@siXjhyAq|Dd|n@d_Dx~OwuKfqWoh_@v_a@u|u@rfz@utQxeX~zAnwQq|L~rN_{h@p_EkhfA||k@ueWluOscWn|NkbBx}UelKrkTwxMtyKmud@hlDmj[gnKoi_@t|Fs_j@{ySc}k@msg@ks\\ipRow\\vuA_a[|pD_hb@smL}yi@_iLks}@geNeaZ{pLqcA|~Rt~SduqAoaJhtf@{yEfla@urLxp{@}dc@bz[ytJ|q_@emYbapApoJ|udAxoSjrT~_Nfab@dll@binBdaQzq{@beE`o]snQvxoAap^~vcCwuAnhq@iaIbnl@i`Anan@wf@vwJs_OreBcv^`g@uxr@koGgmf@cZ}qM_bAvyCwsHljHsgT_qF_eQpyCymK|oIc~R~}BsgXftHi}\\_tb@isBmkb@qifAw`b@{dg@_bVa}p@yzRweVwiNe|i@cfUwueA_rUoq_@vn@atWcwSnw@mwTqtBggUjsJakPazSsl^czC_{p@ueV{ji@gzBu{y@xaC}nQlsNmlSpf@evU|nTwiWfk\\i_i@hqQr@pni@evEvaWeh@fdLeaZ|nSo_^lpBmo]~pT}lTp_a@h[djQeiMfdU}~QpcDw|SlvMi`SniWov@tzQuaFbh^iiV|ns@oat@r`d@{wIp}O{wMbnCeh\\jaAklq@kx@{aZloIe~PraNumz@ngEcyn@hqNu_Zjio@c`Vbks@{~Lrmc@}qd@lcc@s|KpkUoiXzk]ie]xbc@{{Bhns@ijCzroB}~_@fucAqwa@nreAqsIds~AoltA|xeBsvU~yT{eH`zf@euJfiv@euShqKyh`@|aXgzb@`nh@{ox@ftp@wmTthKodZtri@mqUzbi@s|j@dgQq{o@dsUumRbxWz_@hlOmqh@bsl@m|Dv}Tc[tgF}iO|~j@mb^h_wCpcHrarAlsLt`e@p{Chae@ivGzo[|_Rvi}@nhEthl@wjPpmc@n[njuAvoNb~r@jvLtcpAhzBdnh@"
+
+    var polyline = L.Polyline.fromEncoded(encoded0).addTo(map);
+    var polyline = L.Polyline.fromEncoded(encoded1).addTo(map);
+    var polyline = L.Polyline.fromEncoded(encoded2).addTo(map);
+    var polyline = L.Polyline.fromEncoded(encoded3).addTo(map);
+    var polyline = L.Polyline.fromEncoded(encoded4).addTo(map);
+
+    /*
+    var polygon = L.Polygon.fromEncoded(encoded0, {
+      weight: 1,
+      color: '#f30'
+    }).addTo(map);
+
+    var polygon = L.Polygon.fromEncoded(encoded1, {
+      weight: 1,
+      color: '#f30'
+    }).addTo(map);
+
+    var polygon = L.Polygon.fromEncoded(encoded2, {
+      weight: 1,
+      color: '#f30'
+    }).addTo(map);
+
+    var polygon = L.Polygon.fromEncoded(encoded3, {
+      weight: 1,
+      color: '#f30'
+    }).addTo(map);
+
+    var polygon = L.Polygon.fromEncoded(encoded4, {
+      weight: 1,
+      color: '#f30'
+    }).addTo(map);
+*/
+    map.fitBounds(polyline.getBounds());
+
+    </script>
+  </body>
+</html>
+
+
